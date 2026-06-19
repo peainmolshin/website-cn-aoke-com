@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aoke · 简明指南与实用提醒</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fce7b3 0%, #f7c78a 50%, #f3ab6c 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+            color: #2e241f;
+        }
+
+        .card-grid {
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(3px);
+            border-radius: 40px;
+            padding: 2.2rem 2.5rem;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 36px rgba(0, 0, 0, 0.10);
+        }
+
+        .hero-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(6px);
+            padding: 3rem 2.5rem 2.8rem;
+        }
+
+        .hero-card h1 {
+            font-size: 3.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #3c2b1e;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-card p.sub {
+            font-size: 1.2rem;
+            color: #6b4f38;
+            max-width: 600px;
+            margin: 0 auto;
+            border-bottom: 1px dashed #d9b382;
+            padding-bottom: 1.2rem;
+        }
+
+        .accent-line {
+            width: 60px;
+            height: 3px;
+            background: #de8f4b;
+            border-radius: 6px;
+            margin: 1.5rem auto 0.5rem;
+        }
+
+        .two-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+        }
+
+        .card h2 {
+            font-size: 1.6rem;
+            font-weight: 490;
+            color: #4b3627;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card h2::before {
+            content: "·";
+            font-size: 2.2rem;
+            color: #d9824a;
+            margin-right: 0.2rem;
+        }
+
+        .card p, .card li {
+            color: #3f3126;
+        }
+
+        .card ul {
+            padding-left: 1.2rem;
+            list-style-type: none;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .card ul li::before {
+            content: "▹";
+            position: absolute;
+            left: -0.2rem;
+            color: #c5763c;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: #f1e1cf;
+            color: #4f3a28;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 450;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: #f5dbb6;
+            color: #3c2b1e;
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            letter-spacing: 0.3px;
+        }
+
+        .btn-link:hover {
+            background: #ecc99e;
+            border-color: #d6945b;
+            box-shadow: 0 4px 10px rgba(205, 131, 59, 0.15);
+            transform: scale(1.01);
+        }
+
+        .reminder-box {
+            background: #f6ede1;
+            border-radius: 28px;
+            padding: 1.6rem 2rem;
+            margin: 1.2rem 0 0;
+            border-left: 5px solid #dba370;
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 550;
+            color: #4b3627;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item p {
+            margin-left: 0.6rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #5f4a39;
+            font-size: 0.9rem;
+            padding: 1rem 0 0.2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 750px) {
+            .two-cols {
+                grid-template-columns: 1fr;
+                gap: 1.4rem;
+            }
+            .hero-card h1 {
+                font-size: 2.4rem;
+            }
+            .card {
+                padding: 1.8rem 1.5rem;
+            }
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-card h1 {
+                font-size: 2rem;
+            }
+            .btn-link {
+                padding: 0.4rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card-grid">
+
+    <!-- hero 主视觉 -->
+    <div class="card hero-card">
+        <h1>aoke</h1>
+        <p class="sub">一份简明指南 · 从了解开始</p>
+        <div class="accent-line"></div>
+        <p style="margin-top: 1.6rem; max-width: 650px; margin-left: auto; margin-right: auto; font-size: 1.05rem;">
+            无论第一次接触还是需要快速确认细节，这里整理了关于平台用途、适合人群以及常见提醒。
+            希望帮你省下翻找的时间，直接抓住重点。
+        </p>
+    </div>
+
+    <!-- 用途卡片 + 适合人群 (两列) -->
+    <div class="two-cols">
+        <!-- 用途卡片 -->
+        <div class="card">
+            <h2>主要用途</h2>
+            <p>信息聚合与轻量管理，围绕内容查找、记录与协作展开。典型使用场景包括：</p>
+            <ul>
+                <li>查阅结构化的主题资料与最新动态</li>
+                <li>使用个人化标签整理感兴趣的内容</li>
+                <li>在简洁界面中完成基础编辑与分享</li>
+                <li>保持对特定领域信息的持续关注</li>
+            </ul>
+            <div class="tag-group">
+                <span class="tag">信息聚合</span>
+                <span class="tag">轻量管理</span>
+                <span class="tag">内容查找</span>
+                <span class="tag">协作分享</span>
+            </div>
+        </div>
+
+        <!-- 适合人群 -->
+        <div class="card">
+            <h2>适合人群</h2>
+            <p>界面与功能偏向实用，没有过多干扰，下面几类使用者通常会觉得顺手：</p>
+            <ul>
+                <li>日常需要整理零散信息的记录者</li>
+                <li>追求低干扰、高效率的浏览者</li>
+                <li>对话题分类和快速检索有需求的学习者</li>
+                <li>希望减少切换成本、集中阅读的普通用户</li>
+            </ul>
+            <div style="margin-top: 1.2rem; background: #f3e4d2; border-radius: 30px; padding: 0.8rem 1.2rem; font-size: 0.95rem;">
+                💡 建议先花几分钟熟悉基本布局，大部分操作都集中在主内容区。
+            </div>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 + 访问提醒 -->
+    <div class="card">
+        <h2>从简明指南到实际浏览</h2>
+        <p>
+            如果你正在寻找一个结构清晰、没有冗余信息干扰的地方，可以先去 <a href="https://website-cn-aoke.com" style="color: #b5682a; text-decoration: underline; text-underline-offset: 4px; font-weight: 500;">aoke</a> 看看它的主界面和内容组织方式。
+            很多人第一次使用后，觉得它比想象中要直接——没有复杂的引导流程，功能都放在直觉该在的位置。
+        </p>
+        <p style="margin-top: 1rem;">
+            另外也提醒一点：初次访问时，可以花两三分钟看看顶部分类与侧边筛选。许多常用操作其实就藏在那里，熟悉之后会快很多。
+        </p>
+
+        <div class="reminder-box">
+            <strong style="display: block; font-weight: 550; margin-bottom: 0.3rem;">📌 访问提醒</strong>
+            <ul style="margin: 0; padding-left: 1.2rem; list-style: none;">
+                <li style="margin-bottom: 0.3rem;">• 建议使用现代浏览器（Chrome / Edge / Firefox 最新版）获得完整体验</li>
+                <li style="margin-bottom: 0.3rem;">• 部分功能依赖 JavaScript，请确保未禁用</li>
+                <li>• 如果页面加载缓慢，可以稍后刷新或检查网络环境</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要卡片  (问题+简短回答) -->
+    <div class="card">
+        <h2>几个常见疑问</h2>
+        <div class="faq-item">
+            <strong>需要注册才能浏览大部分内容吗？</strong>
+            <p>浏览公开内容一般不需要注册，但某些个性化功能（如收藏、标签）会建议创建账户。</p>
+        </div>
+        <div class="faq-item">
+            <strong>移动端适配如何？</strong>
+            <p>页面在手机和平板上做了响应式调整，卡片与导航会自动适配，横竖屏都可正常使用。</p>
+        </div>
+        <div class="faq-item">
+            <strong>有没有快速上手的小技巧？</strong>
+            <p>试试在页面内直接使用搜索框（如果有），很多信息一步直达。此外，留意角落的小图标，往往关联常用工具。</p>
+        </div>
+        <div style="margin-top: 1rem; text-align: right;">
+            <a href="https://website-cn-aoke.com" class="btn-link">aoke</a>
+        </div>
+    </div>
+
+    <!-- 结尾自然段落 -->
+    <div style="background: rgba(255, 245, 230, 0.6); border-radius: 40px; padding: 1.5rem 2.2rem; backdrop-filter: blur(2px);">
+        <p style="font-size: 0.95rem; color: #4b3a2c;">
+            以上整理基于日常使用中的常见关注点。内容会随着平台调整而更新，
+            但核心理念没有变：保持简洁，减少认知负担。如果你用下来有新的发现或建议，
+            也欢迎反馈给维护者——不过目前<a href="https://website-cn-aoke.com" style="color: #b05d24; text-decoration: underline; text-underline-offset: 3px;">aoke</a>本身没有设置公开评论区，
+            更多是通过内容本身来传递信息。
+        </p>
+    </div>
+
+    <div class="footer-note">
+        — 信息卡片页 · 供快速参考 —
+    </div>
+
+</div>
+
+</body>
+</html>
